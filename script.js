@@ -1,5 +1,9 @@
 function knightMoves(start, end) {
   if (!inputIsValid(start, end)) throw new Error("Invalid input, exiting...");
+  if (start[0] === end[0] && start[1] === end[1]) {
+    console.log("No movement");
+    return;
+  }
   const q = [new Square(...start)];
   const record = {};
   let found;
