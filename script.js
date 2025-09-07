@@ -1,18 +1,18 @@
 function knightMoves(start, end) {
   if (!inputIsValid(start, end)) throw new Error("Invalid input, exiting...");
   const q = [new Square(...start)];
-  const record = [];
+  const record = {};
   let found;
   let count = 0;
   while (!found) {
     const current = q[count];
-    const traversed = isVisited(current, record);
+    const recKey = `${current.x}${current.y}`;
     if (current.x === end[0] && current.y === end[1]) {
       found = true;
       return getOutputFromTarget(current);
-    } else if (!traversed) {
+    } else if (!record[recKey]) {
       q.push(...findAdj(current));
-      record.push(current);
+      record[recKey] = true;
     }
     count++;
   }
@@ -30,10 +30,6 @@ function getOutputFromTarget(square) {
   console.log(`You made it in ${arr.length - 1} moves!  Here's your path:`);
   for (let i = 0; i < arr.length; i++) console.log(arr[i]);
   return arr;
-}
-function isVisited(obj, arr) {
-  for (const v of arr) if (v.x === obj.x && v.y === obj.y) return true;
-  return false;
 }
 function findAdj(parent) {
   const { x, y } = parent;
