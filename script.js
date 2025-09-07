@@ -4,7 +4,7 @@ function knightMoves(start, end) {
   const record = [];
   let found;
   let count = 0;
-  while (q.length && !found) {
+  while (!found) {
     const current = q[count];
     const traversed = isVisited(current, record);
     if (current.x === end[0] && current.y === end[1]) {
